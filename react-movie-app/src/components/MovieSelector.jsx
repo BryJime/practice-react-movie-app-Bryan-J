@@ -1,52 +1,23 @@
 import { useState } from "react";
+import movies from "./movieData";
 
-const movies = [
-    {
-        name: "Interstellar",
-        genre: "SciFi"
-    },
-    {
-        name: "Pulp Fiction",
-        genre: "Drama"
-    },
-    {
-        name: "Spy Kids",
-        genre: "SciFi"
-    },
-    {
-        name: "Oculus",
-        genre: "Horror"
-    },
-    {
-        name: "SpongeBob",
-        genre: "Adventure"
-    },
-]
-
-let showMovies;
 
 function SelectGenre() {
 
     const [selectedGenre, setSelectedGenre] = useState("");
 
-
-
     const handleSelectGenre = (e) => {
 
-        const details = movies.map((movie) => {
+        const findMovies = movies.map((movie) => {
+                
+                if (movie.genre === e.target.value){
+                    return <h2>{movie.name}</h2>
+                }
+            })
+        
 
-            if (e.target.value === movie.genre) {
-                return movie.name
-            }
-
-        })
-
-
-        console.log(details);
-
-        setSelectedGenre(details);
-
-
+        setSelectedGenre(findMovies);
+ 
     }
 
     return (
@@ -61,7 +32,10 @@ function SelectGenre() {
                 <option id="4" value="Drama" >Drama</option>
             </select>
             <br/>
-            <div className="show-movies">  </div>
+            <div className="show-movies">  
+                {selectedGenre}
+            </div>
+    
         </div>
     )
 
